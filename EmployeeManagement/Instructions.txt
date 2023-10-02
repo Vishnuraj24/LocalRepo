@@ -1,0 +1,97 @@
+﻿/* Usage of ViewData in The Details view
+ 
+ <html>
+    <head>
+        <title>@ViewData["TitleName"]</title>
+    </head>
+    <body>
+        <h2>@ViewData["TitleName"]</h2>
+        @{
+            var employee = ViewData["Employee"] as EmployeeManagement.Models.Employee;
+        }
+        <div>
+            Name : @employee.Name
+        </div>
+        <div>
+            ID : @employee.Id
+        </div>
+        <div>
+            Department : @employee.Department
+        </div>
+        <div>
+            Email: @employee.Email
+        </div>
+    </body>
+</html>
+ 
+ 
+ */
+
+
+
+*@
+@{
+}
+@model EmployeeManagement.Models.Employee
+<html>
+    <head>
+        <title>@ViewData["TitleName"]</title>
+    </head>
+    <body>
+        <h2>@ViewData["TitleName"]</h2>
+        
+        <div>
+            Name : @Model.Name
+        </div>
+        <div>
+            ID : @Model.Id
+        </div>
+        <div>
+            Department : @Model.Department
+        </div>
+        <div>
+            Email: @Model.Email
+        </div>
+    </body>
+</html>
+
+-----Sections-----
+
+ @if (IsSectionDefined("Scripts"))          // in _layout
+    {
+        @RenderSection("Scripts",required:true)
+    }
+
+    --in any view page
+
+     @section Scripts{
+     <script src="~/Javascript/SampleScript.js"></script>
+ }
+
+ -----tag helpers---
+ @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+
+ <section class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-4">
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body text-center">
+            <div class="mt-3 mb-4">
+              <img src="~/Images/istockphoto-1300512215-170667a.jpg"
+                class="rounded-circle img-fluid" style="width: 100px;" />
+            </div>
+            <h4 class="mb-2">@emp.Name</h4>
+            <p class="text-muted mb-4">@emp.Department <span class="mx-2">|</span> <a
+                href="#!">@emp.Email</a></p>
+           <td><a asp-controller="Home" asp-action="Details" asp-route-id="@emp.Id" class="btn btn-primary btn-rounded btn-lg">View</a></td>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
